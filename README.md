@@ -6,6 +6,7 @@ Requirements:
 - Dependency injection
 - Unit tests
 - Fluent validation
+- Scalar
 - Global exception handler
 - PostgresSQL
 - Dapper
