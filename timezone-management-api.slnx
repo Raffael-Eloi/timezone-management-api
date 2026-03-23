@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="README.md" />
+  </Folder>
   <Project Path="src/Timezone.Management.API/Timezone.Management.API.csproj" Id="a6ceac09-c609-4140-ba53-242d2b94384c" />
   <Project Path="src/Timezone.Management.Application/Timezone.Management.Application.csproj" Id="237fba2c-d9f2-4188-9e75-a2942b2cf394" />
   <Project Path="tests/Timezone.Management.Application.Tests/Timezone.Management.Application.Tests.csproj" Id="1ad053d9-a3d9-4f1b-926c-f74750e139fe" />

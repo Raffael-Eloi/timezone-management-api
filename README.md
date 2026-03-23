@@ -7,6 +7,7 @@ Requirements:
 - Unit tests
 - Fluent validation
 - Scalar
+- Open Telemetri
 - Global exception handler
 - PostgresSQL
 - Dapper
@@ -15,3 +16,4 @@ Requirements:
 - Integration test
 - Auth with keycloak
 - Terraform
+- .editorconfig
