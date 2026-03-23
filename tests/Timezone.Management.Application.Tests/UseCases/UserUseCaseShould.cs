@@ -21,7 +21,6 @@ internal class UserUseCaseShould
             Email = "jack@gmail.com"
         };
 
-
         int userId = 1;
 
         Guid userGuid = Guid.NewGuid();
@@ -37,7 +36,7 @@ internal class UserUseCaseShould
             })
             .ReturnsAsync(newUser);
 
-        IUserUseCase userUseCase = new UserUseCase();
+        IUserUseCase userUseCase = new UserUseCase(userRepositoryMock.Object);
 
         // Act
 
