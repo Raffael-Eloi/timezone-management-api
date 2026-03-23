@@ -24,6 +24,6 @@ internal class UserValidatorShould
 
         // Assert
         result.IsValid.Should().BeFalse();
-        result.Errors.Should().Contain(x => x.PropertyName == nameof(user.Name) && x.ErrorMessage.Contains("Name is required"));
+        result.Errors.Should().Contain(x => x.PropertyName == nameof(user.Name) && x.ErrorMessage == $"'{nameof(user.Name)}' must not be empty.");
     } 
 }

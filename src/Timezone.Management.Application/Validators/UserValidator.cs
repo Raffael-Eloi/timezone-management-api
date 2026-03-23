@@ -1,13 +1,14 @@
-﻿using FluentValidation.Results;
+﻿using FluentValidation;
 using Timezone.Management.Application.Contracts.Validators;
 using Timezone.Management.Application.Entities;
 
 namespace Timezone.Management.Application.Validators;
 
-public class UserValidator : IUserValidator
+public class UserValidator : AbstractValidator<User>, IUserValidator
 {
-    public ValidationResult Validate(User user)
+    public UserValidator()
     {
-        throw new NotImplementedException();
+        RuleFor(user => user.Name)
+            .NotEmpty();
     }
 }
