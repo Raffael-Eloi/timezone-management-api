@@ -8,7 +8,7 @@ Requirements:
 - Unit tests
 - Fluent validation
 - Scalar
-- Open Telemetri
+- OpenTelemetry
 - Global exception handler
 - PostgresSQL
 - Dapper
