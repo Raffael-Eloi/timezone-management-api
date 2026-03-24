@@ -32,7 +32,7 @@ internal class UserUseCaseShould
             .Callback(() =>
             {
                 newUser.Id = userId;
-                newUser.Guid = userGuid;
+                newUser.Uid = userGuid;
             })
             .ReturnsAsync(newUser);
 
@@ -46,6 +46,6 @@ internal class UserUseCaseShould
         response.UserId.Should().Be(userGuid);
 
         newUser.Id.Should().Be(userId);
-        newUser.Guid.Should().Be(userGuid);
+        newUser.Uid.Should().Be(userGuid);
     }
 }

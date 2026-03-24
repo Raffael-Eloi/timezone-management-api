@@ -13,7 +13,7 @@ public class UserUseCase(IUserRepository userRepository) : IUserUseCase
 
         return new AddUserResponse
         {
-            UserId = addedUser.Guid
+            UserId = addedUser.Uid
         };
     }
 }
