@@ -3,6 +3,7 @@ Diagram: https://app.diagrams.net/#G1LXRdl9yh0B7R9yrvLBW5JFmtnme-UpL0#%7B%22page
 Requirements:
 - .NET 10
 - Minimal APIs
+- API Versioning
 - Dependency injection
 - Unit tests
 - Fluent validation
