@@ -84,7 +84,155 @@ internal class UserUseCaseShould
         response.Errors.First().Should().Be(error);
 
         userRepositoryMock
-            .Verify(repo => repo.AddUser(It.IsAny<User>()), 
+            .Verify(repo => repo.AddUser(It.IsAny<User>()),
+            Times.Never);
+    }
+
+    [Test]
+    public async Task GivenUserUid_WhenGetByUid_ThenTheUserShouldBeReturned()
+    {
+        // Arrange
+        Guid userUid = Guid.NewGuid();
+
+        var existingUser = new User
+        {
+            Id = 1,
+            Uid = userUid,
+            Name = "Jack",
+            Email = "jack@gmail.com"
+        };
+
+        userRepositoryMock
+            .Setup(repo => repo.GetUserByUid(userUid))
+            .ReturnsAsync(existingUser);
+
+        // Act
+        User? response = await userUseCase.GetUserByUid(userUid);
+
+        // Assert
+        response.Should().NotBeNull();
+        response!.Uid.Should().Be(userUid);
+        response.Name.Should().Be("Jack");
+        response.Email.Should().Be("jack@gmail.com");
+    }
+
+    [Test]
+    public async Task GivenUserUid_WhenGetByUid_ThenNullShouldBeReturnedIfNotFound()
+    {
+        // Arrange
+        Guid userUid = Guid.NewGuid();
+
+        userRepositoryMock
+            .Setup(repo => repo.GetUserByUid(userUid))
+            .ReturnsAsync((User?)null);
+
+        // Act
+        User? response = await userUseCase.GetUserByUid(userUid);
+
+        // Assert
+        response.Should().BeNull();
+    }
+
+    [Test]
+    public async Task GivenUser_WhenUpdate_ThenTheUserShouldBeUpdated()
+    {
+        // Arrange
+        Guid userUid = Guid.NewGuid();
+
+        var updatedUser = new User
+        {
+            Name = "Jack Updated",
+            Email = "jack.updated@gmail.com"
+        };
+
+        userRepositoryMock
+            .Setup(repo => repo.UpdateUser(userUid, updatedUser))
+            .Returns(Task.CompletedTask);
+
+        // Act
+        UpdateOrDeleteUserResponse response = await userUseCase.UpdateUser(userUid, updatedUser);
+
+        // Assert
+        response.IsValid.Should().BeTrue();
+
+        userRepositoryMock
+            .Verify(repo => repo.UpdateUser(userUid, updatedUser),
+            Times.Once);
+    }
+
+    [Test]
+    public async Task GivenUser_WhenUpdate_ThenTheUserShouldBeValidated()
+    {
+        // Arrange
+        Guid userUid = Guid.NewGuid();
+
+        var invalidUser = new User();
+
+        ValidationFailure error = new("Name", "Name", "Name is required.");
+
+        validatorMock
+            .Setup(validator => validator.Validate(invalidUser))
+            .Returns(new ValidationResult
+            {
+                Errors = [error]
+            });
+
+        // Act
+        UpdateOrDeleteUserResponse response = await userUseCase.UpdateUser(userUid, invalidUser);
+
+        // Assert
+        response.IsValid.Should().BeFalse();
+        response.Errors.First().Should().Be(error);
+
+        userRepositoryMock
+            .Verify(repo => repo.UpdateUser(It.IsAny<Guid>(), It.IsAny<User>()),
+            Times.Never);
+    }
+
+    [Test]
+    public async Task GivenUserUid_WhenDelete_ThenTheUserShouldBeDeleted()
+    {
+        // Arrange
+        Guid userUid = Guid.NewGuid();
+
+        userRepositoryMock
+            .Setup(repo => repo.GetUserByUid(userUid))
+            .ReturnsAsync(new User { Uid = userUid });
+
+        userRepositoryMock
+            .Setup(repo => repo.DeleteUser(userUid))
+            .Returns(Task.CompletedTask);
+
+        // Act
+        UpdateOrDeleteUserResponse response = await userUseCase.DeleteUser(userUid);
+
+        // Assert
+        response.IsValid.Should().BeTrue();
+
+        userRepositoryMock
+            .Verify(repo => repo.DeleteUser(userUid),
+            Times.Once);
+    }
+
+    [Test]
+    public async Task GivenUserUid_WhenDelete_ThenTheUserShouldExist()
+    {
+        // Arrange
+        Guid userUid = Guid.NewGuid();
+
+        userRepositoryMock
+            .Setup(repo => repo.GetUserByUid(userUid))
+            .ReturnsAsync((User?)null);
+
+        // Act
+        UpdateOrDeleteUserResponse response = await userUseCase.DeleteUser(userUid);
+
+        // Assert
+        response.IsValid.Should().BeFalse();
+        response.Errors.First().ErrorMessage.Should().Be("User not found.");
+
+        userRepositoryMock
+            .Verify(repo => repo.DeleteUser(It.IsAny<Guid>()),
             Times.Never);
     }
 }
