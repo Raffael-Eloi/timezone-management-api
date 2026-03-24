@@ -1,6 +1,8 @@
-﻿namespace Timezone.Management.Application.Models;
+﻿using FluentValidation.Results;
 
-public class AddUserResponse
+namespace Timezone.Management.Application.Models;
+
+public class AddUserResponse : ValidationResult
 {
-    public Guid? UserId { get; set; }
+    public Guid? UserUid { get; set; }
 }
