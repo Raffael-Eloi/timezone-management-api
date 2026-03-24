@@ -12,16 +12,20 @@ namespace Timezone.Management.Application.Tests.UseCases;
 
 internal class UserUseCaseShould
 {
-    private Mock<IUserRepository> userRepositoryMock;
     private Mock<IUserValidator> validatorMock;
+    private Mock<IUserRepository> userRepositoryMock;
     private IUserUseCase userUseCase;
 
     [SetUp]
     public void Setup()
     {
-        userRepositoryMock = new Mock<IUserRepository>();
         validatorMock = new Mock<IUserValidator>();
-        userUseCase = new UserUseCase(userRepositoryMock.Object);
+        userRepositoryMock = new Mock<IUserRepository>();
+        userUseCase = new UserUseCase(validatorMock.Object, userRepositoryMock.Object);
+
+        validatorMock
+            .Setup(validator => validator.Validate(It.IsAny<User>()))
+            .Returns(new ValidationResult());
     }
 
     [Test]
