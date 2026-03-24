@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Endpoints\" />
+    <ProjectReference Include="..\Timezone.Management.Application\Timezone.Management.Application.csproj" />
   </ItemGroup>
 
 </Project>
