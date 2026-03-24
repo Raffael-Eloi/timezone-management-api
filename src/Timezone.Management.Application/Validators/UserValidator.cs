@@ -9,6 +9,13 @@ public class UserValidator : AbstractValidator<User>, IUserValidator
     public UserValidator()
     {
         RuleFor(user => user.Name)
-            .NotEmpty();
+            .NotEmpty()
+            .MinimumLength(3)
+            .MaximumLength(100);
+
+        RuleFor(user => user.Email)
+            .NotEmpty()
+            .MinimumLength(3)
+            .MaximumLength(100);
     }
 }
