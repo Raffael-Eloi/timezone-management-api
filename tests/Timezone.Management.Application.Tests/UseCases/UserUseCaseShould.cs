@@ -32,7 +32,7 @@ internal class UserUseCaseShould
     public async Task GivenUser_WhenCreate_ThenTheUserShouldBeCreated()
     {
         // Arrange
-        var newUser = new User
+        User newUser = new User
         {
             Name = "Jack",
             Email = "jack@gmail.com"
@@ -65,7 +65,7 @@ internal class UserUseCaseShould
     public async Task GivenUser_WhenCreate_ThenTheUserShouldBeValidated()
     {
         // Arrange
-        var invalidUser = new User();
+        User invalidUser = new User();
 
         ValidationFailure error = new("Name", "Name", "Name is required.");
 
@@ -94,7 +94,7 @@ internal class UserUseCaseShould
         // Arrange
         Guid userUid = Guid.NewGuid();
 
-        var existingUser = new User
+        User existingUser = new User
         {
             Id = 1,
             Uid = userUid,
@@ -139,7 +139,7 @@ internal class UserUseCaseShould
         // Arrange
         Guid userUid = Guid.NewGuid();
 
-        var updatedUser = new User
+        User updatedUser = new User
         {
             Name = "Jack Updated",
             Email = "jack.updated@gmail.com"
@@ -166,7 +166,7 @@ internal class UserUseCaseShould
         // Arrange
         Guid userUid = Guid.NewGuid();
 
-        var invalidUser = new User();
+        User invalidUser = new User();
 
         ValidationFailure error = new("Name", "Name", "Name is required.");
 

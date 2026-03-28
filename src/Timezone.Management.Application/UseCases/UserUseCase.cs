@@ -24,10 +24,8 @@ public class UserUseCase(IUserValidator validator, IUserRepository repository) :
         };
     }
 
-    public async Task<User?> GetUserByUid(Guid userUid)
-    {
-        return await repository.GetUserByUid(userUid);
-    }
+    public async Task<User?> GetUserByUid(Guid userUid) =>
+        await repository.GetUserByUid(userUid);
 
     public async Task<UpdateOrDeleteUserResponse> UpdateUser(Guid userUid, User user)
     {
