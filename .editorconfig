@@ -7,6 +7,9 @@ indent_style=tab
 
 #Formatting - new line options
 
+#prefer file-scoped namespaces
+csharp_style_namespace_declarations = file_scoped:warning
+
 #place else statements on a new line
 csharp_new_line_before_else=true
 #require members of object intializers to be on separate lines
