@@ -39,5 +39,5 @@ jobs:
       - name: Run Tests
         run: |
           cd tests
-          cd Timezone.Management.Application    
+          cd Timezone.Management.Application.Tests    
           dotnet test
