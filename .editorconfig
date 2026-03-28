@@ -1,0 +1,340 @@
+[*.cs]
+
+#Core editorconfig formatting - indentation
+
+#use hard tabs for indentation
+indent_style=tab
+
+#Formatting - new line options
+
+#place else statements on a new line
+csharp_new_line_before_else=true
+#require members of object intializers to be on separate lines
+csharp_new_line_before_members_in_object_initializers=true
+#require braces to be on a new line for control_blocks, types, object_collection_array_initializers, and methods (also known as "Allman" style)
+csharp_new_line_before_open_brace=control_blocks, types, object_collection_array_initializers, methods
+
+#Formatting - organize using options
+
+#sort System.* using directives alphabetically, and place them before other usings
+dotnet_sort_system_directives_first=true
+
+#Formatting - spacing options
+
+#require NO space between a cast and the value
+csharp_space_after_cast=false
+#require a space before the colon for bases or interfaces in a type declaration
+csharp_space_after_colon_in_inheritance_clause=true
+#require a space after a keyword in a control flow statement such as a for loop
+csharp_space_after_keywords_in_control_flow_statements=true
+#require a space before the colon for bases or interfaces in a type declaration
+csharp_space_before_colon_in_inheritance_clause=true
+#remove space within empty argument list parentheses
+csharp_space_between_method_call_empty_parameter_list_parentheses=false
+#remove space between method call name and opening parenthesis
+csharp_space_between_method_call_name_and_opening_parenthesis=false
+#do not place space characters after the opening parenthesis and before the closing parenthesis of a method call
+csharp_space_between_method_call_parameter_list_parentheses=false
+#place a space character after the opening parenthesis and before the closing parenthesis of a method declaration parameter list.
+csharp_space_between_method_declaration_parameter_list_parentheses=false
+
+#Formatting - wrapping options
+
+#leave code block on single line
+csharp_preserve_single_line_blocks=true
+
+#Style - Code block preferences
+
+#prefer curly braces even for one line of code
+csharp_prefer_braces=when_multiline
+
+#Style - expression bodied member options
+
+#prefer expression bodies for constructors
+csharp_style_expression_bodied_constructors=true
+#prefer expression-bodied members for methods
+csharp_style_expression_bodied_methods=true
+
+#Style - expression level options
+
+#prefer out variables to be declared inline in the argument list of a method call when possible
+csharp_style_inlined_variable_declaration=true
+#prefer the language keyword for member access expressions, instead of the type name, for types that have a keyword to represent them
+dotnet_style_predefined_type_for_member_access=true:warning
+
+#Style - Expression-level  preferences
+
+#prefer objects to be initialized using object initializers when possible
+dotnet_style_object_initializer=true:suggestion
+
+#Style - implicit and explicit types
+
+#prefer explicit type over var in all cases, unless overridden by another code style rule
+csharp_style_var_elsewhere=false:warning
+#prefer explicit type over var to declare variables with built-in system types such as int
+csharp_style_var_for_built_in_types=false:warning
+#prefer var when the type is already mentioned on the right-hand side of a declaration expression
+csharp_style_var_when_type_is_apparent=false:warning
+
+#Style - language keyword and framework type options
+
+#prefer the language keyword for local variables, method parameters, and class members, instead of the type name, for types that have a keyword to represent them
+dotnet_style_predefined_type_for_locals_parameters_members=true:warning
+
+#Style - modifier options
+
+#prefer accessibility modifiers to be declared except for public interface members. This will currently not differ from always and will act as future proofing for if C# adds default interface methods.
+dotnet_style_require_accessibility_modifiers=for_non_interface_members:warning
+
+#Style - Modifier preferences
+
+#when this rule is set to a list of modifiers, prefer the specified ordering.
+csharp_preferred_modifier_order=public,private,protected,internal,static,extern,new,virtual,abstract,sealed,override,readonly,unsafe,volatile,async
+
+#Style - qualification options
+
+#prefer fields not to be prefaced with this.
+dotnet_style_qualification_for_field=false:warning
+#prefer methods not to be prefaced with this.
+dotnet_style_qualification_for_method=false:warning
+#prefer using declaration without braces
+csharp_prefer_simple_using_statement=true
+#prefer expression-bodied operators
+csharp_style_expression_bodied_operators=true
+#prefer expression-bodied properties
+csharp_style_expression_bodied_properties=true
+#prefer expression-bodied indexers
+csharp_style_expression_bodied_indexers=true
+#prefer expression-bodied accessors (get, set)
+csharp_style_expression_bodied_accessors=true
+#prefer expression-bodied lambdas
+csharp_style_expression_bodied_lambdas=true
+#prefer expression-bodied local functions
+csharp_style_expression_bodied_local_functions=true
+#prefer discard (_) for unused value assignments
+csharp_style_unused_value_assignment_preference=discard_variable:warning
+#prefer discard (_) for unused expression statement results
+csharp_style_unused_value_expression_statement_preference=discard_variable:suggestion
+#prefer switch expression over switch statement
+csharp_style_prefer_switch_expression=true
+#prefer pattern matching where possible
+csharp_style_prefer_pattern_matching=true
+#prefer pattern matching over is check followed by a cast
+csharp_style_pattern_matching_over_is_with_cast_check=true
+#prefer pattern matching over as followed by a null check
+csharp_style_pattern_matching_over_as_with_null_check=true
+#prefer inline throw expressions
+csharp_style_throw_expression=true
+#prefer is null / is not null over type check for null checking
+csharp_style_prefer_null_check_over_type_check=true
+#prefer static on local functions that don't capture enclosing variables
+csharp_prefer_static_local_function=true
+
+# Diagnostic severities - SA/CA/S rules
+#classes should not be coupled to too many other classes
+dotnet_diagnostic.S1200.severity=suggestion
+#use nameof in place of string
+dotnet_diagnostic.CA1507.severity=warning
+#do not initialize unnecessarily
+dotnet_diagnostic.CA1805.severity=warning
+#file must have header
+dotnet_diagnostic.SA1633.severity=silent
+#XML comment analysis is disabled due to project configuration
+dotnet_diagnostic.SA0001.severity=none
+#prefix local calls with this
+dotnet_diagnostic.SA1101.severity=none
+#elements should be documented
+dotnet_diagnostic.SA1600.severity=silent
+#field names should not begin with underscore
+dotnet_diagnostic.SA1309.severity=silent
+#using directives should be placed correctly
+dotnet_diagnostic.SA1200.severity=none
+#use trailing comma in multi-line initializers
+dotnet_diagnostic.SA1413.severity=silent
+#fields should be private
+dotnet_diagnostic.SA1401.severity=warning
+#keywords should be spaced correctly (false positive with target-typed new())
+dotnet_diagnostic.SA1000.severity=none
+#braces should not be omitted
+dotnet_diagnostic.SA1503.severity=silent
+#declaration keywords should follow order
+dotnet_diagnostic.SA1206.severity=silent
+#enumeration items should be documented
+dotnet_diagnostic.SA1602.severity=silent
+#partial elements should be documented
+dotnet_diagnostic.SA1601.severity=silent
+#closing parenthesis should not be followed by a space (false positive with primary constructors)
+dotnet_diagnostic.SA1009.severity=none
+#opening square bracket should not be preceded by a space (false positive with collection expressions)
+dotnet_diagnostic.SA1010.severity=none
+#closing square bracket should be followed by a space (false positive with null-forgiving operator)
+dotnet_diagnostic.SA1011.severity=none
+#tabs and spaces should be used correctly (conflicts with indent_style=tab)
+dotnet_diagnostic.SA1027.severity=none
+#parameter should begin with lower-case letter (false positive with positional record parameters)
+dotnet_diagnostic.SA1313.severity=none
+#make member static (false positive with DTO properties needed for serialization)
+dotnet_diagnostic.S2325.severity=suggestion
+#elements should be separated by blank line (false positive with auto-generated implicit usings)
+dotnet_diagnostic.SA1516.severity=none
+#misleading indentation on braceless single-line if (conflicts with csharp_prefer_braces=when_multiline)
+dotnet_diagnostic.S2681.severity=none
+
+# Diagnostic severities - IDE rules (enforced during build via EnforceCodeStyleInBuild)
+#add braces
+dotnet_diagnostic.IDE0011.severity=suggestion
+#use throw expression
+dotnet_diagnostic.IDE0016.severity=warning
+#inline variable declaration
+dotnet_diagnostic.IDE0018.severity=warning
+#use pattern matching to avoid as followed by a null check
+dotnet_diagnostic.IDE0019.severity=warning
+#use pattern matching to avoid is check followed by a cast
+dotnet_diagnostic.IDE0020.severity=warning
+#use expression body for constructors
+dotnet_diagnostic.IDE0021.severity=warning
+#use expression body for methods
+dotnet_diagnostic.IDE0022.severity=warning
+#use expression body for operators
+dotnet_diagnostic.IDE0024.severity=warning
+#use expression body for properties
+dotnet_diagnostic.IDE0025.severity=warning
+#use expression body for indexers
+dotnet_diagnostic.IDE0026.severity=warning
+#use expression body for accessors
+dotnet_diagnostic.IDE0027.severity=warning
+#order modifiers
+dotnet_diagnostic.IDE0036.severity=suggestion
+#use expression body for lambdas
+dotnet_diagnostic.IDE0053.severity=warning
+#use expression body for local functions
+dotnet_diagnostic.IDE0061.severity=warning
+#make local function static
+dotnet_diagnostic.IDE0062.severity=suggestion
+#use simple using statement
+dotnet_diagnostic.IDE0063.severity=warning
+#use switch expression
+dotnet_diagnostic.IDE0066.severity=warning
+#use pattern matching
+dotnet_diagnostic.IDE0078.severity=suggestion
+#prefer null check over type check
+dotnet_diagnostic.IDE0150.severity=warning
+
+#prefer ternary over if/else for assignment
+dotnet_style_prefer_conditional_expression_over_assignment=true
+#prefer ternary over if/else for return
+dotnet_style_prefer_conditional_expression_over_return=true
+#prefer compound assignment (e.g. x += 5)
+dotnet_style_prefer_compound_assignment=true
+#prefer simplified string interpolation (no explicit .ToString())
+dotnet_style_prefer_simplified_interpolation=true
+#require accessibility modifiers except on interface members
+dotnet_style_require_accessibility_modifiers=for_non_interface_members
+#allow multiple consecutive blank lines
+dotnet_style_allow_multiple_blank_lines_experimental=true
+#require blank line between closing brace and next statement
+dotnet_style_allow_statement_immediately_after_block_experimental=false
+#flag all unused parameters
+dotnet_code_quality_unused_parameters=all
+#prefer fields not to be prefaced with this.
+dotnet_style_qualification_for_field=false
+#prefer properties not to be prefaced with this.
+dotnet_style_qualification_for_property=false
+#prefer methods not to be prefaced with this.
+dotnet_style_qualification_for_method=false
+#prefer events not to be prefaced with this.
+dotnet_style_qualification_for_event=false
+#prefer null-coalescing operator (??)
+dotnet_style_coalesce_expression=true
+#prefer null-conditional operator (?.)
+dotnet_style_null_propagation=true
+#prefer is null over ReferenceEquals
+dotnet_style_prefer_is_null_check_over_reference_equality_method=true
+#prefer auto-properties over properties with backing fields
+dotnet_style_prefer_auto_properties=true:suggestion
+#prefer object initializer syntax
+dotnet_style_object_initializer=true
+#prefer collection initializer syntax
+dotnet_style_collection_initializer=true
+#prefer simplified boolean expressions
+dotnet_style_prefer_simplified_boolean_expressions=true
+#prefer named tuple fields over Item1, Item2
+dotnet_style_explicit_tuple_names=true
+#prefer inferred member names in anonymous types
+dotnet_style_prefer_inferred_anonymous_type_member_names=true
+#prefer inferred element names in tuples
+dotnet_style_prefer_inferred_tuple_names=true
+#prefer readonly on fields only assigned in constructor
+dotnet_style_readonly_field=true
+#prefer language keywords (int, string) for declarations
+dotnet_style_predefined_type_for_locals_parameters_members=true
+#prefer language keywords (int, string) for member access
+dotnet_style_predefined_type_for_member_access=true
+
+# Diagnostic severities - CA/SA/S rules
+#generic interface should also be implemented
+dotnet_diagnostic.CA1010.severity=warning
+#do not use Count()/LongCount() when Any() can be used
+dotnet_diagnostic.CA1827.severity=suggestion
+#do not use CountAsync()/LongCountAsync() when AnyAsync() can be used
+dotnet_diagnostic.CA1828.severity=suggestion
+#do not use broken cryptographic algorithms (MD5)
+dotnet_diagnostic.CA5351.severity=warning
+#do not use weak cryptographic algorithms (SHA1)
+dotnet_diagnostic.CA5350.severity=warning
+#do not call dangerous methods in deserialization
+dotnet_diagnostic.CA5360.severity=suggestion
+#do not use deprecated security protocols
+dotnet_diagnostic.CA5364.severity=warning
+#template should be a static expression
+dotnet_diagnostic.CA2254.severity=silent
+#documentation text should end with a period
+dotnet_diagnostic.SA1629.severity=silent
+#static elements should appear before instance elements
+dotnet_diagnostic.SA1204.severity=silent
+#use primary constructors
+dotnet_diagnostic.IDE0290.severity=warning
+#literal boolean values should not be used in assertions
+dotnet_diagnostic.S2701.severity=warning
+#utility classes should not have public constructors
+dotnet_diagnostic.S1118.severity=silent
+
+# Diagnostic severities - IDE rules (enforced during build via EnforceCodeStyleInBuild)
+#remove this or Me qualification
+dotnet_diagnostic.IDE0003.severity=warning
+#use object initializers
+dotnet_diagnostic.IDE0017.severity=suggestion
+#use collection initializers
+dotnet_diagnostic.IDE0028.severity=suggestion
+#use coalesce expression (??)
+dotnet_diagnostic.IDE0029.severity=warning
+#use null propagation (?.)
+dotnet_diagnostic.IDE0031.severity=warning
+#use explicitly provided tuple name
+dotnet_diagnostic.IDE0033.severity=warning
+#use inferred member name
+dotnet_diagnostic.IDE0037.severity=warning
+#add accessibility modifiers
+dotnet_diagnostic.IDE0040.severity=warning
+#use is null check
+dotnet_diagnostic.IDE0041.severity=warning
+#add readonly modifier
+dotnet_diagnostic.IDE0044.severity=warning
+#use conditional expression for assignment
+dotnet_diagnostic.IDE0045.severity=suggestion
+#use conditional expression for return
+dotnet_diagnostic.IDE0046.severity=suggestion
+#use language keywords instead of framework type names
+dotnet_diagnostic.IDE0049.severity=warning
+#use compound assignment
+dotnet_diagnostic.IDE0054.severity=warning
+#remove unused parameter
+dotnet_diagnostic.IDE0060.severity=warning
+#simplify interpolation
+dotnet_diagnostic.IDE0071.severity=warning
+#simplify conditional expression
+dotnet_diagnostic.IDE0075.severity=warning
+#allow multiple blank lines
+dotnet_diagnostic.IDE2000.severity=warning
+#allow statement immediately after block
+dotnet_diagnostic.IDE2003.severity=warning
