@@ -1,5 +1,6 @@
 <Solution>
   <Folder Name="/Solution Items/">
+    <File Path=".github/workflows/ci-cd-pipeline.yml" />
     <File Path="README.md" />
   </Folder>
   <Project Path="src/Timezone.Management.API/Timezone.Management.API.csproj" Id="a6ceac09-c609-4140-ba53-242d2b94384c" />
