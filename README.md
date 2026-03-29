@@ -18,3 +18,5 @@ Requirements:
 - Auth with keycloak
 - Terraform
 - .editorconfig
+- Directoy.Build.Props
+- Docker
