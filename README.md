@@ -20,3 +20,4 @@ Requirements:
 - .editorconfig
 - Directoy.Build.Props
 - Docker
+- HTML Injection sanitizer
