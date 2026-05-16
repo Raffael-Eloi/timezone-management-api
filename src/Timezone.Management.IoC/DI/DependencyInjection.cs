@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using DbUp;
+﻿using DbUp;
 using DbUp.Engine;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,12 +15,24 @@ namespace Timezone.Management.IoC.DI;
 
 public static class DependencyInjection
 {
+	public static void AddAzureAppConfig(this IConfigurationManager configurationManager, IConfiguration configuration)
+	{
+		string? azureAppConfig = configuration.GetConnectionString("AzureAppConfig");
+
+		if (azureAppConfig is null)
+			throw new ArgumentNullException(nameof(azureAppConfig), "Azure AppConfig is not configured. Please check your configuration settings.");
+
+		configurationManager.AddAzureAppConfiguration(options => {
+			options.Connect(azureAppConfig);
+		});
+	}
+
 	public static void AddDBConfig(this IServiceCollection services, IConfiguration configuration)
 	{
-		string? connectionString = configuration.GetConnectionString("Postgres");
+		string? connectionString = configuration["DatabaseConnectionString"];
 
 		if (connectionString is null)
-			throw new Exception("Postgres connection string is not configured. Please check your configuration settings.");
+			throw new ArgumentNullException(nameof(connectionString), "Postgres connection string is not configured. Please check your configuration settings.");
 
 		UpgradeEngine upgrader = DeployChanges.To
 			.PostgresqlDatabase(connectionString)

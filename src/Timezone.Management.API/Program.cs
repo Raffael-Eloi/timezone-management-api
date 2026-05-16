@@ -6,6 +6,8 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddOpenApi();
 
+builder.Configuration.AddAzureAppConfig(builder.Configuration);
+
 builder.Services.AddDBConfig(builder.Configuration);
 
 builder.Services.InjectServices();
