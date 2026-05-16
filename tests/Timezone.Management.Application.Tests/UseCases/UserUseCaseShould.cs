@@ -38,27 +38,19 @@ internal class UserUseCaseShould
             Email = "jack@gmail.com"
         };
 
-        int userId = 1;
-
-        Guid userGuid = Guid.NewGuid();
+        Guid addedUserUid = Guid.NewGuid();
 
         userRepositoryMock
             .Setup(repo => repo.AddUser(newUser))
-            .Callback(() =>
-            {
-                newUser.Id = userId;
-                newUser.Uid = userGuid;
-            })
-            .ReturnsAsync(newUser);
+            .ReturnsAsync(addedUserUid);
 
         // Act
         AddUserResponse response = await userUseCase.AddUser(newUser);
 
         // Assert
-        response.UserUid.Should().Be(userGuid);
+        response.UserUid.Should().Be(addedUserUid);
 
-        newUser.Id.Should().Be(userId);
-        newUser.Uid.Should().Be(userGuid);
+        newUser.Uid.Should().Be(addedUserUid);
     }
 
     [Test]

@@ -16,12 +16,12 @@ public class UserUseCase(IUserValidator validator, IUserRepository repository) :
         if (!validationResult.IsValid)
             return new AddUserResponse { Errors = validationResult.Errors };
 
-        User addedUser = await repository.AddUser(user);
+        Guid userId = await repository.AddUser(user);
 
         return new AddUserResponse
         {
-            UserUid = addedUser.Uid
-        };
+            UserUid = userId
+		};
     }
 
     public async Task<User?> GetUserByUid(Guid userUid) =>

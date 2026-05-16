@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Timezone.Management.Application\Timezone.Management.Application.csproj" />
+    <ProjectReference Include="..\Timezone.Management.IoC\Timezone.Management.IoC.csproj" />
   </ItemGroup>
 
 </Project>

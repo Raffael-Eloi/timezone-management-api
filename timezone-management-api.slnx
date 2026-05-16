@@ -7,5 +7,6 @@
   <Project Path="src/Timezone.Management.API/Timezone.Management.API.csproj" Id="a6ceac09-c609-4140-ba53-242d2b94384c" />
   <Project Path="src/Timezone.Management.Application/Timezone.Management.Application.csproj" Id="237fba2c-d9f2-4188-9e75-a2942b2cf394" />
   <Project Path="src/Timezone.Management.Infrastructure/Timezone.Management.Infrastructure.csproj" Id="7ff2720a-1150-49a7-9a00-14ce50839c6e" />
+  <Project Path="src/Timezone.Management.IoC/Timezone.Management.IoC.csproj" Id="39f1e087-4089-4d38-87ea-eef92ff7a7fd" />
   <Project Path="tests/Timezone.Management.Application.Tests/Timezone.Management.Application.Tests.csproj" Id="1ad053d9-a3d9-4f1b-926c-f74750e139fe" />
 </Solution>

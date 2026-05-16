@@ -7,6 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Database\Scripts\0001_create_users_table.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.1.72" />
+    <PackageReference Include="dbup-postgresql" Version="7.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="10.0.8" />
+    <PackageReference Include="Npgsql" Version="10.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Timezone.Management.Application\Timezone.Management.Application.csproj" />
   </ItemGroup>
 

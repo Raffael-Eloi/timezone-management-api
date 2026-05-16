@@ -1,19 +1,14 @@
 using Scalar.AspNetCore;
 using Timezone.Management.API.Endpoints;
-using Timezone.Management.Application.Contracts.Repositories;
-using Timezone.Management.Application.Contracts.UseCases;
-using Timezone.Management.Application.Contracts.Validators;
-using Timezone.Management.Application.Repositories;
-using Timezone.Management.Application.UseCases;
-using Timezone.Management.Application.Validators;
+using Timezone.Management.IoC.DI;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddOpenApi();
 
-builder.Services.AddScoped<IUserValidator, UserValidator>();
-builder.Services.AddScoped<IUserUseCase, UserUseCase>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddDBConfig(builder.Configuration);
+
+builder.Services.InjectServices();
 
 WebApplication app = builder.Build();
 

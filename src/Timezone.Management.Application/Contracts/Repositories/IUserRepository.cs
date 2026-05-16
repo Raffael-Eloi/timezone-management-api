@@ -4,7 +4,7 @@ namespace Timezone.Management.Application.Contracts.Repositories;
 
 public interface IUserRepository
 {
-    Task<User> AddUser(User user);
+    Task<Guid> AddUser(User user);
 
     Task<User?> GetUserByUid(Guid userUid);
 
