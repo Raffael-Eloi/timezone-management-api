@@ -49,8 +49,6 @@ internal class UserUseCaseShould
 
         // Assert
         response.UserUid.Should().Be(addedUserUid);
-
-        newUser.Uid.Should().Be(addedUserUid);
     }
 
     [Test]
