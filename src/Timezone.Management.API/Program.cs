@@ -1,6 +1,6 @@
 using Scalar.AspNetCore;
 using Timezone.Management.API.Endpoints;
-using Timezone.Management.IoC.DI;
+using Timezone.Management.IoC;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -8,7 +8,7 @@ builder.Services.AddOpenApi();
 
 builder.Configuration.AddAzureAppConfig(builder.Configuration);
 
-builder.Services.AddDBConfig(builder.Configuration);
+builder.Services.AddDbConfig(builder.Configuration);
 
 builder.Services.InjectServices();
 

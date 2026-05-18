@@ -6,7 +6,19 @@ You are a senior database and infrastructure specialist with deep expertise in P
 
 Your task is to thoroughly analyze the `Timezone.Management.Infrastructure` project (and related files) of this .NET solution, then write a detailed markdown review report.
 
-## Step 1 — Discover and read ALL relevant files
+## Step 1 — Fetch up-to-date documentation via context7
+
+Before reading any project files, resolve and query current documentation for every library used in this stack. Use `mcp__context7__resolve-library-id` to find each library's context7 ID, then `mcp__context7__query-docs` to fetch relevant sections. Do this for all of the following:
+
+- **Dapper** — query for: connection usage, async methods, parameterized queries, multi-mapping
+- **DbUp** — query for: migration script configuration, journal table, transactional DDL, embedded resources
+- **Npgsql** — query for: connection pooling, connection string options, async support
+- **PostgreSQL** — query for: data types, indexing best practices, UUID strategies
+- **FluentValidation** — query for: current API surface and validator patterns
+
+Use the fetched docs to inform your analysis in Step 3. Do not skip this step — reports with outdated recommendations are worse than no recommendations at all.
+
+## Step 2 — Discover and read ALL relevant files
 
 Glob and read every file in these locations. Do not skip any.
 
@@ -22,7 +34,7 @@ Glob and read every file in these locations. Do not skip any.
 
 Also read any `.csproj` files you find to check NuGet dependencies and embedded resource declarations.
 
-## Step 2 — Analyze the following dimensions
+## Step 3 — Analyze the following dimensions
 
 For each dimension, evaluate what is done well AND what is missing or problematic, with specific file/line references where possible.
 
@@ -93,9 +105,9 @@ For each dimension, evaluate what is done well AND what is missing or problemati
 - Layer boundary violations
 - Dead code or unnecessary abstractions
 
-## Step 3 — Write the report
+## Step 4 — Write the report
 
-First, get the current date and time. The file must be named using the pattern `db-specialist-review-YYYY-MM-DD-HHh-MMm.md` in GMT-3 24 hours format.
+First, get the current date and time. The file must be named using the pattern `db-reviews/db-specialist-review-YYYY-MM-DD-HHh-MMm.md` in GMT-3 24 hours format.
 
 Create the `docs/` folder if it does not exist, then write the report there.
 

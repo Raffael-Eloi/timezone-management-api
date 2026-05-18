@@ -1,7 +1,22 @@
 <Solution>
+  <Folder Name="/Deploy/">
+    <File Path=".github/workflows/ci-cd-pipeline.yml" />
+  </Folder>
+  <Folder Name="/Deploy/Docker/">
+    <File Path=".dockerignore" />
+    <File Path="src/Timezone.Management.API/Dockerfile" />
+  </Folder>
+  <Folder Name="/Deploy/Infrastructure/">
+    <File Path="infrastructure/main.tf" />
+    <File Path="infrastructure/variables.tf" />
+  </Folder>
+  <Folder Name="/Deploy/Infrastructure/Bootstrap/">
+    <File Path="infrastructure/bootstrap/required_main.tf" />
+    <File Path="infrastructure/bootstrap/variables.tf" />
+  </Folder>
   <Folder Name="/Solution Items/">
     <File Path=".editorconfig" />
-    <File Path=".github/workflows/ci-cd-pipeline.yml" />
+    <File Path="Directory.Build.props" />
     <File Path="README.md" />
   </Folder>
   <Project Path="src/Timezone.Management.API/Timezone.Management.API.csproj" Id="a6ceac09-c609-4140-ba53-242d2b94384c" />
