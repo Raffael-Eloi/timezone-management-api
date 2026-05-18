@@ -82,6 +82,8 @@ jobs:
         with:
           push: true
           tags: ${{ steps.image_tag.outputs.full }}
+          context: .
+          file: src/Timezone.Management.API/Dockerfile
 
   terraformPlan:
     name: Terraform Plan
