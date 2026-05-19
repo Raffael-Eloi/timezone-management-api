@@ -88,8 +88,8 @@ resource "azurerm_key_vault_secret" "db_connection_string" {
 resource "azurerm_app_configuration_key" "db_connection_string" {
   configuration_store_id = azurerm_app_configuration.appconf.id
   key                    = "ConnectionStrings:Postgres"
-  type                   = "vault"
-  vault_key_reference    = azurerm_key_vault_secret.db_connection_string.versionless_id
+  type                   = "kv"
+  value                  = local.db_connection_string
 
   depends_on = [azurerm_key_vault_access_policy.app_configuration]
 }
