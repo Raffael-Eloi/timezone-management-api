@@ -7,6 +7,7 @@
     <File Path="src/Timezone.Management.API/Dockerfile" />
   </Folder>
   <Folder Name="/Deploy/Infrastructure/">
+    <File Path="infrastructure/imports.tf" />
     <File Path="infrastructure/main.tf" />
     <File Path="infrastructure/variables.tf" />
   </Folder>
