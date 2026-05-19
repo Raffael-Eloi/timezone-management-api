@@ -191,7 +191,7 @@ resource "azurerm_postgresql_flexible_server" "timezonemanagementserver" {
   sku_name               = "B_Standard_B1ms"
   tags                   = local.tags
   # Required to prevent zone drift on subsequent applies.
-  zone                   = "1"
+  zone = "1"
 
   lifecycle {
     prevent_destroy = true
