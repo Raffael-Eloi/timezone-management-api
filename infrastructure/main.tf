@@ -67,7 +67,7 @@ resource "azurerm_app_configuration" "appconf" {
 data "azurerm_client_config" "current" {}
 
 resource "azurerm_key_vault" "app_config_key_vault" {
-  name                       = "appconfigkeyvault"
+  name                       = "timezone-mgmt-kv"
   location                   = data.azurerm_resource_group.raffa_lab_rg.location
   resource_group_name        = data.azurerm_resource_group.raffa_lab_rg.name
   tenant_id                  = data.azurerm_client_config.current.tenant_id
