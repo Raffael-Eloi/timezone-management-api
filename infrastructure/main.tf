@@ -63,7 +63,7 @@ resource "azurerm_key_vault_access_policy" "app_configuration" {
 data "azurerm_client_config" "current" {}
 
 resource "azurerm_key_vault" "app_config_key_vault" {
-  name                       = "timezone-mgmt-kv"
+  name                       = "tz-management-kv"
   location                   = data.azurerm_resource_group.raffa_lab_rg.location
   resource_group_name        = data.azurerm_resource_group.raffa_lab_rg.name
   tenant_id                  = data.azurerm_client_config.current.tenant_id
@@ -81,6 +81,8 @@ resource "azurerm_key_vault_secret" "db_connection_string" {
   name         = "dbconnectionstring"
   key_vault_id = azurerm_key_vault.app_config_key_vault.id
   value        = local.db_connection_string
+
+  depends_on = [azurerm_key_vault_access_policy.terraform_sp]
 }
 
 resource "azurerm_app_configuration_key" "db_connection_string" {
@@ -88,6 +90,8 @@ resource "azurerm_app_configuration_key" "db_connection_string" {
   key                    = "ConnectionStrings:Postgres"
   type                   = "vault"
   vault_key_reference    = azurerm_key_vault_secret.db_connection_string.versionless_id
+
+  depends_on = [azurerm_key_vault_access_policy.app_configuration]
 }
 
 resource "azurerm_key_vault_access_policy" "terraform_sp" {
@@ -186,6 +190,8 @@ resource "azurerm_postgresql_flexible_server" "timezonemanagementserver" {
   storage_mb             = 32768
   sku_name               = "B_Standard_B1ms"
   tags                   = local.tags
+  # Required to prevent zone drift on subsequent applies.
+  zone                   = "1"
 
   lifecycle {
     prevent_destroy = true
