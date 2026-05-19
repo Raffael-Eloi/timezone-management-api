@@ -28,7 +28,7 @@ terraform {
 }
 
 provider "azurerm" {
-  resource_provider_registrations = "none"
+  resource_provider_registrations = "all"
   subscription_id                 = var.subscription_id
   features {}
 }
@@ -37,25 +37,6 @@ data "azurerm_resource_group" "raffa_lab_rg" {
   name = "RaffaLabRG"
 }
 
-resource "azurerm_resource_provider_registration" "key_vault" {
-  name = "Microsoft.KeyVault"
-}
-
-resource "azurerm_resource_provider_registration" "app_configuration" {
-  name = "Microsoft.AppConfiguration"
-}
-
-resource "azurerm_resource_provider_registration" "container_apps" {
-  name = "Microsoft.App"
-}
-
-resource "azurerm_resource_provider_registration" "operational_insights" {
-  name = "Microsoft.OperationalInsights"
-}
-
-resource "azurerm_resource_provider_registration" "postgresql" {
-  name = "Microsoft.DBforPostgreSQL"
-}
 
 resource "azurerm_app_configuration" "appconf" {
   name                = "timezone-management-app-config"
@@ -202,7 +183,6 @@ resource "azurerm_postgresql_flexible_server_database" "timezonemanagementdb" {
   collation = "en_US.utf8"
   charset   = "UTF8"
 
-  # prevent the possibility of accidental data loss
   lifecycle {
     prevent_destroy = true
   }
