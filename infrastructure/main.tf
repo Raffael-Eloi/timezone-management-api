@@ -43,6 +43,21 @@ resource "azurerm_app_configuration" "appconf" {
   resource_group_name = data.azurerm_resource_group.raffa_lab_rg.name
   location            = data.azurerm_resource_group.raffa_lab_rg.location
   tags                = local.tags
+
+  identity {
+    type = "SystemAssigned"
+  }
+}
+
+resource "azurerm_key_vault_access_policy" "app_configuration" {
+  key_vault_id = azurerm_key_vault.app_config_key_vault.id
+  tenant_id    = data.azurerm_client_config.current.tenant_id
+  object_id    = azurerm_app_configuration.appconf.identity[0].principal_id
+
+  secret_permissions = [
+    "Get",
+    "List",
+  ]
 }
 
 data "azurerm_client_config" "current" {}
