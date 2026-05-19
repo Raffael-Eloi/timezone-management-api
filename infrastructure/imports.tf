@@ -19,11 +19,6 @@ import {
 }
 
 import {
-  to = azurerm_key_vault.app_config_key_vault
-  id = "/subscriptions/${var.subscription_id}/resourceGroups/RaffaLabRG/providers/Microsoft.KeyVault/vaults/appconfigkeyvault"
-}
-
-import {
   to = azurerm_log_analytics_workspace.log_analytic
   id = "/subscriptions/${var.subscription_id}/resourceGroups/RaffaLabRG/providers/Microsoft.OperationalInsights/workspaces/timezone-management-log-analytic"
 }
