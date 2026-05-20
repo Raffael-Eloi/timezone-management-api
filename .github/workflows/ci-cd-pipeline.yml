@@ -88,7 +88,7 @@ jobs:
   terraformPlan:
     name: Terraform Plan
     runs-on: ubuntu-latest
-    needs: pushImageToDockerHub
+    needs: tests
 
     steps:
       - name: Checkout code
@@ -118,7 +118,6 @@ jobs:
           cd infrastructure
           terraform plan \
             -var="subscription_id=${{ secrets.AZURE_SUBSCRIPTION_ID }}" \
-            -var="container_image=${{ needs.pushImageToDockerHub.outputs.image }}" \
             -var="db_login=${{ secrets.DB_LOGIN }}" \
             -var="db_password=${{ secrets.DB_PASSWORD }}" \
             -out=tfplan

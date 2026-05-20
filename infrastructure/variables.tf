@@ -18,6 +18,7 @@ variable "environment" {
 variable "container_image" {
   type        = string
   description = "Full container image reference to deploy."
+  default     = "mcr.microsoft.com/azuredocs/containerapps-helloworld:latest"
 }
 
 variable "db_login" {
