@@ -18,10 +18,14 @@ WebApplication app = builder.Build();
 app.MapOpenApi();
 app.MapScalarApiReference();
 
-app.UseForwardedHeaders(new ForwardedHeadersOptions
+// Azure Container Apps terminates TLS at the ingress; port 8080 is not directly internet-accessible, so trusting X-Forwarded-Proto from any source is safe.
+ForwardedHeadersOptions forwardedOptions = new()
 {
     ForwardedHeaders = ForwardedHeaders.XForwardedProto
-});
+};
+forwardedOptions.KnownIPNetworks.Clear();
+forwardedOptions.KnownProxies.Clear();
+app.UseForwardedHeaders(forwardedOptions);
 
 app.UseHttpsRedirection();
 
