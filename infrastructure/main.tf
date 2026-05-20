@@ -167,7 +167,7 @@ resource "azurerm_container_app" "container_app" {
       startup_probe {
         transport               = "TCP"
         port                    = 8080
-        initial_delay           = 10
+        initial_delay_seconds   = 10
         interval_seconds        = 5
         failure_count_threshold = 3
       }
