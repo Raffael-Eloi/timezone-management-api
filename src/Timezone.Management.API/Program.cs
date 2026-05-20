@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.HttpOverrides;
 using Scalar.AspNetCore;
 using Timezone.Management.API.Endpoints;
 using Timezone.Management.IoC;
@@ -16,6 +17,11 @@ WebApplication app = builder.Build();
 
 app.MapOpenApi();
 app.MapScalarApiReference();
+
+app.UseForwardedHeaders(new ForwardedHeadersOptions
+{
+    ForwardedHeaders = ForwardedHeaders.XForwardedProto
+});
 
 app.UseHttpsRedirection();
 
