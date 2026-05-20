@@ -6,7 +6,7 @@ locals {
     managed_by  = "terraform"
   }
 
-  db_connection_string = "Host=${azurerm_postgresql_flexible_server.timezonemanagementserver.fqdn};Database=timezonemanagementdb;Username=${var.db_login};Password=${var.db_password};SslMode=Require;"
+  db_connection_string = "Host=${azurerm_postgresql_flexible_server.timezonemanagementserver.fqdn};Database=timezonemanagementdb;Username=${var.db_login};Password='${var.db_password}';SslMode=Require;"
 }
 terraform {
   required_version = ">= 1.5.2"
