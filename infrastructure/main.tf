@@ -95,6 +95,10 @@ resource "azurerm_app_configuration_key" "db_connection_string" {
     azurerm_key_vault_access_policy.app_configuration,
     azurerm_role_assignment.terraform_sp_appconfig_owner,
   ]
+
+  lifecycle {
+    ignore_changes = [configuration_store_id]
+  }
 }
 
 resource "azurerm_key_vault_access_policy" "terraform_sp" {
