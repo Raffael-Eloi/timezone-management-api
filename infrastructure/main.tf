@@ -217,3 +217,10 @@ resource "azurerm_postgresql_flexible_server_database" "timezonemanagementdb" {
     prevent_destroy = true
   }
 }
+
+resource "azurerm_postgresql_flexible_server_firewall_rule" "allow_azure_services" {
+  name             = "allow-azure-services"
+  server_id        = azurerm_postgresql_flexible_server.timezonemanagementserver.id
+  start_ip_address = "0.0.0.0"
+  end_ip_address   = "0.0.0.0"
+}
