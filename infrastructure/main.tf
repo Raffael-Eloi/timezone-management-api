@@ -141,7 +141,7 @@ resource "azurerm_container_app" "container_app" {
 
   lifecycle {
     prevent_destroy = true
-    #ignore_changes  = [template]
+    ignore_changes  = [template]
   }
 
   ingress {
