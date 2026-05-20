@@ -168,7 +168,7 @@ jobs:
           
   deploy:
     name: Deploy
-    needs: terraformApply
+    needs: [terraformApply, pushImageToDockerHub]
     runs-on: ubuntu-latest
     environment: production
     steps:
