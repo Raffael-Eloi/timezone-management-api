@@ -91,7 +91,10 @@ resource "azurerm_app_configuration_key" "db_connection_string" {
   type                   = "kv"
   value                  = local.db_connection_string
 
-  depends_on = [azurerm_key_vault_access_policy.app_configuration]
+  depends_on = [
+    azurerm_key_vault_access_policy.app_configuration,
+    azurerm_role_assignment.terraform_sp_appconfig_owner,
+  ]
 }
 
 resource "azurerm_key_vault_access_policy" "terraform_sp" {
@@ -178,6 +181,12 @@ resource "azurerm_role_assignment" "container_app_appconfig_reader" {
   scope                = azurerm_app_configuration.appconf.id
   role_definition_name = "App Configuration Data Reader"
   principal_id         = azurerm_container_app.container_app.identity[0].principal_id
+}
+
+resource "azurerm_role_assignment" "terraform_sp_appconfig_owner" {
+  scope                = azurerm_app_configuration.appconf.id
+  role_definition_name = "App Configuration Data Owner"
+  principal_id         = data.azurerm_client_config.current.object_id
 }
 
 resource "azurerm_postgresql_flexible_server" "timezonemanagementserver" {
