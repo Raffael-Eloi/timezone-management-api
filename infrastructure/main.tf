@@ -141,7 +141,7 @@ resource "azurerm_container_app" "container_app" {
 
   lifecycle {
     prevent_destroy = true
-    ignore_changes  = [template]
+    #ignore_changes  = [template]
   }
 
   ingress {
@@ -163,6 +163,15 @@ resource "azurerm_container_app" "container_app" {
       image  = var.container_image
       cpu    = 0.25
       memory = "0.5Gi"
+
+      startup_probe {
+        transport               = "TCP"
+        port                    = 8080
+        initial_delay           = 10
+        interval_seconds        = 5
+        failure_count_threshold = 3
+      }
+
       env {
         name  = "AZURE_APPCONFIGURATION_ENDPOINT"
         value = azurerm_app_configuration.appconf.endpoint
