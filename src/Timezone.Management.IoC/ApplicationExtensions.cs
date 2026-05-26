@@ -1,9 +1,9 @@
 using Microsoft.Extensions.DependencyInjection;
-using Timezone.Management.Application.Contracts.Repositories;
 using Timezone.Management.Application.Contracts.UseCases;
 using Timezone.Management.Application.Contracts.Validators;
 using Timezone.Management.Application.UseCases;
 using Timezone.Management.Application.Validators;
+using Timezone.Management.Domain.Contracts.Repositories;
 using Timezone.Management.Infrastructure.Repositories;
 
 namespace Timezone.Management.IoC;

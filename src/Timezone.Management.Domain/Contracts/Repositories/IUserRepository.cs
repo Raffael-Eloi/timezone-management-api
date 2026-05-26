@@ -1,7 +1,7 @@
 ﻿using Timezone.Management.Domain.Entities;
 using Timezone.Management.Domain.Models;
 
-namespace Timezone.Management.Application.Contracts.Repositories;
+namespace Timezone.Management.Domain.Contracts.Repositories;
 
 public interface IUserRepository
 {

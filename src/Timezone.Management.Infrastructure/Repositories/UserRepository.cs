@@ -1,6 +1,6 @@
 ﻿using System.Data;
 using Dapper;
-using Timezone.Management.Application.Contracts.Repositories;
+using Timezone.Management.Domain.Contracts.Repositories;
 using Timezone.Management.Domain.Entities;
 using Timezone.Management.Domain.Models;
 using Timezone.Management.Infrastructure.Database.Contracts;

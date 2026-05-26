@@ -1,12 +1,12 @@
 ﻿using FluentAssertions;
 using FluentValidation.Results;
 using Moq;
-using Timezone.Management.Application.Contracts.Repositories;
 using Timezone.Management.Application.Contracts.UseCases;
 using Timezone.Management.Application.Contracts.Validators;
 using Timezone.Management.Domain.Entities;
 using Timezone.Management.Application.Models;
 using Timezone.Management.Application.UseCases;
+using Timezone.Management.Domain.Contracts.Repositories;
 using Timezone.Management.Domain.Models;
 
 namespace Timezone.Management.Application.Tests.UseCases;

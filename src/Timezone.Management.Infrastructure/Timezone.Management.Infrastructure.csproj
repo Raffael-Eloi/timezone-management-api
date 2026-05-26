@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Timezone.Management.Application\Timezone.Management.Application.csproj" />
+    <ProjectReference Include="..\Timezone.Management.Domain\Timezone.Management.Domain.csproj" />
   </ItemGroup>
 
 </Project>

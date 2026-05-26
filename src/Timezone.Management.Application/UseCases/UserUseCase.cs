@@ -1,8 +1,8 @@
 ﻿using FluentValidation.Results;
-using Timezone.Management.Application.Contracts.Repositories;
 using Timezone.Management.Application.Contracts.UseCases;
 using Timezone.Management.Application.Contracts.Validators;
 using Timezone.Management.Application.Models;
+using Timezone.Management.Domain.Contracts.Repositories;
 using Timezone.Management.Domain.Entities;
 using Timezone.Management.Domain.Models;
 
