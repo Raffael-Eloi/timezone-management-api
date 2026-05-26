@@ -7,6 +7,7 @@ using Timezone.Management.Application.Contracts.Validators;
 using Timezone.Management.Domain.Entities;
 using Timezone.Management.Application.Models;
 using Timezone.Management.Application.UseCases;
+using Timezone.Management.Domain.Models;
 
 namespace Timezone.Management.Application.Tests.UseCases;
 
@@ -121,6 +122,36 @@ internal class UserUseCaseShould
 
         // Assert
         response.Should().BeNull();
+    }
+    
+    [Test]
+    public async Task GivenFilter_WhenGetUsersWithFilter_ThenTheUsersShouldBeReturned()
+    {
+	    // Arrange
+	    UsersFilter filter = new();
+
+	    User existingUser1 = new()
+	    {
+		    Uid = Guid.NewGuid(),
+	    };
+	    
+	    User existingUser2 = new()
+	    {
+		    Uid = Guid.NewGuid(),
+	    };
+
+	    userRepositoryMock
+		    .Setup(repo => repo.GetUsers(filter))
+		    .ReturnsAsync([existingUser1, existingUser2]);
+
+	    // Act
+	    IEnumerable<UserModel> response = await userUseCase.GetUsers(filter);
+
+	    // Assert
+	    response.Should().NotBeNullOrEmpty();
+	    response.Count().Should().Be(2);
+	    response!.First().Uid.Should().Be(existingUser1.Uid);
+	    response!.Last().Uid.Should().Be(existingUser2.Uid);
     }
 
     [Test]

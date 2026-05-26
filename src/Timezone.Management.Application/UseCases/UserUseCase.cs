@@ -4,6 +4,7 @@ using Timezone.Management.Application.Contracts.UseCases;
 using Timezone.Management.Application.Contracts.Validators;
 using Timezone.Management.Application.Models;
 using Timezone.Management.Domain.Entities;
+using Timezone.Management.Domain.Models;
 
 namespace Timezone.Management.Application.UseCases;
 
@@ -38,7 +39,13 @@ public class UserUseCase(IUserValidator validator, IUserRepository repository) :
         return MapUserModel(user);
     }
 
-    private static UserModel MapUserModel(User user) => new() { Uid = user.Uid, Name = user.Name, Email = user.Email };
+	public async Task<IEnumerable<UserModel>> GetUsers(UsersFilter filter)
+	{
+		IEnumerable<User> users = await repository.GetUsers(filter);
+		return users.Select(MapUserModel);
+	}
+
+	private static UserModel MapUserModel(User user) => new() { Uid = user.Uid, Name = user.Name, Email = user.Email };
 
     public async Task<UpdateOrDeleteUserResponse> UpdateUser(Guid userUid, AddOrUpdateUserModel userRequest)
     {

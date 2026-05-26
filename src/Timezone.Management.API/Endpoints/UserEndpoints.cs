@@ -1,6 +1,8 @@
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Mvc;
 using Timezone.Management.Application.Contracts.UseCases;
 using Timezone.Management.Application.Models;
+using Timezone.Management.Domain.Models;
 
 namespace Timezone.Management.API.Endpoints;
 
@@ -40,6 +42,18 @@ public sealed class UserEndpoints
             .Produces(StatusCodes.Status404NotFound)
             .WithDescription("Get a single user by UID")
             .WithSummary("Get User")
+            .WithTags("Users");
+        
+        app.MapGet("/api/v1.0/users", async (
+		    [AsParameters] UsersFilter filter,
+            IUserUseCase userUseCase) =>
+        {
+            IEnumerable<UserModel> users = await userUseCase.GetUsers(filter);
+            return Results.Ok(users);
+        })
+            .Produces<IEnumerable<UserModel>>(StatusCodes.Status200OK)
+            .WithDescription("Get filtered users")
+            .WithSummary("Get Users")
             .WithTags("Users");
 
         app.MapPut("/api/v1.0/users/{userUid:guid}", async (
