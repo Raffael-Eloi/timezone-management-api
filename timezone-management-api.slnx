@@ -25,4 +25,5 @@
   <Project Path="src/Timezone.Management.Infrastructure/Timezone.Management.Infrastructure.csproj" Id="7ff2720a-1150-49a7-9a00-14ce50839c6e" />
   <Project Path="src/Timezone.Management.IoC/Timezone.Management.IoC.csproj" Id="39f1e087-4089-4d38-87ea-eef92ff7a7fd" />
   <Project Path="tests/Timezone.Management.Application.Tests/Timezone.Management.Application.Tests.csproj" Id="1ad053d9-a3d9-4f1b-926c-f74750e139fe" />
+  <Project Path="tests/Timezone.Management.Architecture.Tests/Timezone.Management.Architecture.Tests.csproj" />
 </Solution>
