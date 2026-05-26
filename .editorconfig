@@ -296,7 +296,7 @@ dotnet_diagnostic.SA1629.severity=silent
 #static elements should appear before instance elements
 dotnet_diagnostic.SA1204.severity=silent
 #use primary constructors
-dotnet_diagnostic.IDE0290.severity=warning
+dotnet_diagnostic.IDE0290.severity=none
 #literal boolean values should not be used in assertions
 dotnet_diagnostic.S2701.severity=warning
 #utility classes should not have public constructors
