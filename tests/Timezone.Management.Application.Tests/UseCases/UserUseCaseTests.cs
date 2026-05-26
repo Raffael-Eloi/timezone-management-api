@@ -11,7 +11,7 @@ using Timezone.Management.Domain.Models;
 
 namespace Timezone.Management.Application.Tests.UseCases;
 
-internal class UserUseCaseShould
+internal class UserUseCaseTests
 {
     private Mock<IUserValidator> validatorMock;
     private Mock<IUserRepository> userRepositoryMock;

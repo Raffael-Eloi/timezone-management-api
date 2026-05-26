@@ -6,7 +6,7 @@ using Timezone.Management.Application.Validators;
 
 namespace Timezone.Management.Application.Tests.Validators;
 
-internal class UserValidatorShould
+internal class UserValidatorTests
 {
     private IUserValidator userValidator;
     private User user;
