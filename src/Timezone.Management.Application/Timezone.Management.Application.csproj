@@ -10,4 +10,8 @@
     <PackageReference Include="FluentValidation" Version="12.1.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Timezone.Management.Domain\Timezone.Management.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using FluentValidation.Results;
 using Timezone.Management.Application.Contracts.Validators;
-using Timezone.Management.Application.Entities;
+using Timezone.Management.Domain.Entities;
 using Timezone.Management.Application.Validators;
 
 namespace Timezone.Management.Application.Tests.Validators;

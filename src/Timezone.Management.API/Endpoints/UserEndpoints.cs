@@ -1,6 +1,5 @@
 using FluentValidation.Results;
 using Timezone.Management.Application.Contracts.UseCases;
-using Timezone.Management.Application.Entities;
 using Timezone.Management.Application.Models;
 
 namespace Timezone.Management.API.Endpoints;
@@ -11,9 +10,9 @@ public sealed class UserEndpoints
     {
         app.MapPost("/api/v1.0/users", async (
             IUserUseCase userUseCase,
-            User user) =>
+            AddOrUpdateUserModel userRequest) =>
         {
-            AddUserResponse response = await userUseCase.AddUser(user);
+            AddUserResponse response = await userUseCase.AddUser(userRequest);
 
             if (!response.IsValid)
                 return Results.BadRequest(response.Errors);
@@ -30,14 +29,14 @@ public sealed class UserEndpoints
             IUserUseCase userUseCase,
             Guid userUid) =>
         {
-            User? user = await userUseCase.GetUserByUid(userUid);
+            UserModel? user = await userUseCase.GetUserByUid(userUid);
 
             if (user is null)
                 return Results.NotFound();
 
             return Results.Ok(user);
         })
-            .Produces<User>(StatusCodes.Status200OK)
+            .Produces<UserModel>(StatusCodes.Status200OK)
             .Produces(StatusCodes.Status404NotFound)
             .WithDescription("Get a single user by UID")
             .WithSummary("Get User")
@@ -46,9 +45,9 @@ public sealed class UserEndpoints
         app.MapPut("/api/v1.0/users/{userUid:guid}", async (
             IUserUseCase userUseCase,
             Guid userUid,
-            User user) =>
+            AddOrUpdateUserModel userRequest) =>
         {
-            UpdateOrDeleteUserResponse response = await userUseCase.UpdateUser(userUid, user);
+            UpdateOrDeleteUserResponse response = await userUseCase.UpdateUser(userUid, userRequest);
 
             if (!response.IsValid)
                 return Results.BadRequest(response.Errors);

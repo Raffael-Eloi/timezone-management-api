@@ -2,15 +2,17 @@
 using Timezone.Management.Application.Contracts.Repositories;
 using Timezone.Management.Application.Contracts.UseCases;
 using Timezone.Management.Application.Contracts.Validators;
-using Timezone.Management.Application.Entities;
 using Timezone.Management.Application.Models;
+using Timezone.Management.Domain.Entities;
 
 namespace Timezone.Management.Application.UseCases;
 
 public class UserUseCase(IUserValidator validator, IUserRepository repository) : IUserUseCase
 {
-    public async Task<AddUserResponse> AddUser(User user)
+    public async Task<AddUserResponse> AddUser(AddOrUpdateUserModel userRequest)
     {
+	    User user = MapUser(userRequest);
+	    
         ValidationResult validationResult = validator.Validate(user);
 
         if (!validationResult.IsValid)
@@ -24,11 +26,24 @@ public class UserUseCase(IUserValidator validator, IUserRepository repository) :
 		};
     }
 
-    public async Task<User?> GetUserByUid(Guid userUid) =>
-        await repository.GetUserByUid(userUid);
+	private static User MapUser(AddOrUpdateUserModel userRequest) => new() { Name = userRequest.Name, Email = userRequest.Email };
 
-    public async Task<UpdateOrDeleteUserResponse> UpdateUser(Guid userUid, User user)
+	public async Task<UserModel?> GetUserByUid(Guid userUid)
     {
+        User? user = await repository.GetUserByUid(userUid);
+        
+        if (user is null)
+	        return null;
+        
+        return MapUserModel(user);
+    }
+
+    private static UserModel MapUserModel(User user) => new() { Uid = user.Uid, Name = user.Name, Email = user.Email };
+
+    public async Task<UpdateOrDeleteUserResponse> UpdateUser(Guid userUid, AddOrUpdateUserModel userRequest)
+    {
+	    User user = MapUser(userRequest);
+	    
         ValidationResult validationResult = validator.Validate(user);
 
         if (!validationResult.IsValid)

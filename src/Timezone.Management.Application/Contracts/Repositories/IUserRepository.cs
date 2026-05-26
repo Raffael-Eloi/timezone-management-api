@@ -1,4 +1,4 @@
-﻿using Timezone.Management.Application.Entities;
+﻿using Timezone.Management.Domain.Entities;
 
 namespace Timezone.Management.Application.Contracts.Repositories;
 

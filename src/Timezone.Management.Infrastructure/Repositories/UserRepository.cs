@@ -1,7 +1,7 @@
 ﻿using System.Data;
 using Dapper;
 using Timezone.Management.Application.Contracts.Repositories;
-using Timezone.Management.Application.Entities;
+using Timezone.Management.Domain.Entities;
 using Timezone.Management.Infrastructure.Database.Contracts;
 
 namespace Timezone.Management.Infrastructure.Repositories;

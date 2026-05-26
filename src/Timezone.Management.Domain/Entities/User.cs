@@ -1,4 +1,4 @@
-﻿namespace Timezone.Management.Application.Entities;
+﻿namespace Timezone.Management.Domain.Entities;
 
 public class User
 {

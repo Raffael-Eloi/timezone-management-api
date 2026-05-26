@@ -4,7 +4,7 @@ using Moq;
 using Timezone.Management.Application.Contracts.Repositories;
 using Timezone.Management.Application.Contracts.UseCases;
 using Timezone.Management.Application.Contracts.Validators;
-using Timezone.Management.Application.Entities;
+using Timezone.Management.Domain.Entities;
 using Timezone.Management.Application.Models;
 using Timezone.Management.Application.UseCases;
 
@@ -32,7 +32,7 @@ internal class UserUseCaseShould
     public async Task GivenUser_WhenCreate_ThenTheUserShouldBeCreated()
     {
         // Arrange
-        User newUser = new User
+        AddOrUpdateUserModel newUser = new()
         {
             Name = "Jack",
             Email = "jack@gmail.com"
@@ -41,7 +41,7 @@ internal class UserUseCaseShould
         Guid addedUserUid = Guid.NewGuid();
 
         userRepositoryMock
-            .Setup(repo => repo.AddUser(newUser))
+            .Setup(repo => repo.AddUser(It.Is<User>(user => user.Name == newUser.Name &&  user.Email == newUser.Email)))
             .ReturnsAsync(addedUserUid);
 
         // Act
@@ -55,12 +55,12 @@ internal class UserUseCaseShould
     public async Task GivenUser_WhenCreate_ThenTheUserShouldBeValidated()
     {
         // Arrange
-        User invalidUser = new User();
+        AddOrUpdateUserModel invalidUser = new();
 
         ValidationFailure error = new("Name", "Name", "Name is required.");
 
         validatorMock
-            .Setup(validator => validator.Validate(invalidUser))
+            .Setup(validator => validator.Validate(It.IsAny<User>()))
             .Returns(new ValidationResult
             {
                 Errors = [error]
@@ -97,7 +97,7 @@ internal class UserUseCaseShould
             .ReturnsAsync(existingUser);
 
         // Act
-        User? response = await userUseCase.GetUserByUid(userUid);
+        UserModel? response = await userUseCase.GetUserByUid(userUid);
 
         // Assert
         response.Should().NotBeNull();
@@ -117,7 +117,7 @@ internal class UserUseCaseShould
             .ReturnsAsync((User?)null);
 
         // Act
-        User? response = await userUseCase.GetUserByUid(userUid);
+        UserModel? response = await userUseCase.GetUserByUid(userUid);
 
         // Assert
         response.Should().BeNull();
@@ -129,14 +129,14 @@ internal class UserUseCaseShould
         // Arrange
         Guid userUid = Guid.NewGuid();
 
-        User updatedUser = new User
+        AddOrUpdateUserModel updatedUser = new()
         {
             Name = "Jack Updated",
             Email = "jack.updated@gmail.com"
         };
 
         userRepositoryMock
-            .Setup(repo => repo.UpdateUser(userUid, updatedUser))
+            .Setup(repo => repo.UpdateUser(userUid, It.Is<User>(user => user.Name == updatedUser.Name &&  user.Email == updatedUser.Email)))
             .Returns(Task.CompletedTask);
 
         // Act
@@ -146,7 +146,7 @@ internal class UserUseCaseShould
         response.IsValid.Should().BeTrue();
 
         userRepositoryMock
-            .Verify(repo => repo.UpdateUser(userUid, updatedUser),
+            .Verify(repo => repo.UpdateUser(userUid, It.IsAny<User>()),
             Times.Once);
     }
 
@@ -156,12 +156,12 @@ internal class UserUseCaseShould
         // Arrange
         Guid userUid = Guid.NewGuid();
 
-        User invalidUser = new User();
+        AddOrUpdateUserModel invalidUser = new AddOrUpdateUserModel();
 
         ValidationFailure error = new("Name", "Name", "Name is required.");
 
         validatorMock
-            .Setup(validator => validator.Validate(invalidUser))
+            .Setup(validator => validator.Validate(It.IsAny<User>()))
             .Returns(new ValidationResult
             {
                 Errors = [error]
