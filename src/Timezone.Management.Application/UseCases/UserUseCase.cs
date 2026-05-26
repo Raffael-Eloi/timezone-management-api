@@ -12,6 +12,10 @@ public class UserUseCase(IUserValidator validator, IUserRepository repository) :
 {
     public async Task<AddUserResponse> AddUser(AddOrUpdateUserModel userRequest)
     {
+	    IEnumerable<User> existingUsersWithEmail = await repository.GetUsers(new UsersFilter{Email = userRequest.Email});
+	    if (existingUsersWithEmail.Any())
+		    return new AddUserResponse { Errors = [new ValidationFailure("Email", "Email already exists.")] };
+	    
 	    User user = MapUser(userRequest);
 	    
         ValidationResult validationResult = validator.Validate(user);
@@ -49,6 +53,14 @@ public class UserUseCase(IUserValidator validator, IUserRepository repository) :
 
     public async Task<UpdateOrDeleteUserResponse> UpdateUser(Guid userUid, AddOrUpdateUserModel userRequest)
     {
+	    User? existingUser = await repository.GetUserByUid(userUid);
+	    if (existingUser is null)
+		    return new UpdateOrDeleteUserResponse { Errors = [new ValidationFailure("UserUid", "User not found.")] };
+
+	    List<User> usersWithEmail = [.. await repository.GetUsers(new UsersFilter{Email = userRequest.Email})];
+	    if (usersWithEmail.Count >= 1 && usersWithEmail.First().Uid != userUid)
+		    return new UpdateOrDeleteUserResponse { Errors = [new ValidationFailure("Email", "Email already exists.")] };
+	    
 	    User user = MapUser(userRequest);
 	    
         ValidationResult validationResult = validator.Validate(user);
@@ -66,10 +78,12 @@ public class UserUseCase(IUserValidator validator, IUserRepository repository) :
         User? user = await repository.GetUserByUid(userUid);
 
         if (user is null)
+        {
             return new UpdateOrDeleteUserResponse
             {
                 Errors = [new ValidationFailure("UserUid", "User not found.")]
             };
+        }
 
         await repository.DeleteUser(userUid);
 
