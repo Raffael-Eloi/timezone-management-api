@@ -37,14 +37,14 @@ public class UserRepository(IDbConnectionFactory dbConnectionfactory) : IUserRep
 		using IDbConnection connection = dbConnectionfactory.CreateConnection();
 
 		SqlBuilder builder = new();
-		SqlBuilder.Template query = builder.AddTemplate("SELECT uid, name, email FROM users/**WHERE**/");
+		SqlBuilder.Template query = builder.AddTemplate("SELECT uid, name, email FROM users /**where**/");
 		
 		if (!string.IsNullOrEmpty(filter.Name))
-			builder.Where("name = @Name", filter.Name);
+			builder.Where("name = @Name", new { filter.Name });
 		
 		if (!string.IsNullOrEmpty(filter.Email))
-			builder.Where("email = @Email", filter.Email);
-		
+			builder.Where("email = @Email", new { filter.Email });
+
 		return await connection.QueryAsync<User>(query.RawSql, query.Parameters);
 	}
 
