@@ -9,11 +9,13 @@ builder.Services.AddOpenApi();
 
 builder.Configuration.AddAzureAppConfig(builder.Configuration);
 
-builder.Services.AddDbConfig(builder.Configuration);
+builder.Services.AddDbConfig();
 
 builder.Services.InjectServices();
 
 WebApplication app = builder.Build();
+
+app.RunDbMigrations();
 
 app.MapOpenApi();
 app.MapScalarApiReference();
@@ -32,3 +34,5 @@ app.UseHttpsRedirection();
 UserEndpoints.Map(app);
 
 app.Run();
+
+public partial class Program { }

@@ -40,16 +40,41 @@ jobs:
         with:
           dotnet-version: 10.0.x
 
-      - name: Run Tests
+      - name: Run Architecture Tests
+        run: |
+          cd tests
+          cd Timezone.Management.Architecture.Tests    
+          dotnet test
+      
+      - name: Run Application Tests
         run: |
           cd tests
           cd Timezone.Management.Application.Tests    
+          dotnet test
+          
+  integrationTests:
+    name: Integration Tests
+    runs-on: ubuntu-latest
+    needs: tests
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Run Integration Tests
+        run: |
+          cd tests
+          cd Timezone.Management.Integration.Tests    
           dotnet test
 
   pushImageToDockerHub:
     name: Push Image to Docker Hub
     runs-on: ubuntu-latest
-    needs: tests
+    needs: integrationTests
     outputs:
       image: ${{ steps.image_tag.outputs.full }}
       
