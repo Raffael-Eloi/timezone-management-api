@@ -73,6 +73,7 @@ jobs:
           dotnet test
 
   pushImageToDockerHub:
+    if: github.event_name == 'push'
     name: Push Image to Docker Hub
     runs-on: ubuntu-latest
     needs: integrationTests
@@ -112,6 +113,7 @@ jobs:
           file: src/Timezone.Management.API/Dockerfile
 
   terraformPlan:
+    if: github.event_name == 'push'
     name: Terraform Plan
     runs-on: ubuntu-latest
     needs: pushImageToDockerHub
@@ -155,6 +157,7 @@ jobs:
           path: infrastructure/tfplan
 
   terraformApply:
+    if: github.event_name == 'push'
     name: Terraform Apply
     runs-on: ubuntu-latest
     needs: terraformPlan
@@ -193,6 +196,7 @@ jobs:
           terraform apply -auto-approve tfplan
           
   deploy:
+    if: github.event_name == 'push'
     name: Deploy
     needs: [terraformApply, pushImageToDockerHub]
     runs-on: ubuntu-latest
